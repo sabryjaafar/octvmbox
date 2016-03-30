@@ -1,0 +1,39 @@
+- hosts: all
+  sudo: true
+  tasks:
+    
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: install emacs
+      apt: name=emacs state=present
+    
+    - name: install curl
+      apt: name=curl state=present
+
+    - name: install vim
+      apt: name=vim state=present
+
+    - name: install build-essential
+      apt: name=build-essential state=present
+    
+    - name: install nodejs
+      apt: name=nodejs state=present
+    
+    - name: install npm
+      apt: name=npm state=present
+      
+    - name: install mongodb
+      apt: name=mongodb state=present
+    
+    - name: install gulp
+      command: npm install -g gulp
+    
+    - name: install bower
+      command: npm install -g bower
+
+    - name: name change
+      copy: src=../tasks/hostname.yml dest=/etc/hostname mode=644 owner=root group=root
+      notify: restart
+
+    - script: ../tasks/curl.sh
