@@ -2,9 +2,6 @@
   sudo: true
   tasks:
     
-    - name: update apt cache
-      apt: update_cache=yes
-
     - name: install emacs
       apt: name=emacs state=present
     
@@ -22,18 +19,16 @@
     
     - name: install npm
       apt: name=npm state=present
-      
-    - name: install mongodb
-      apt: name=mongodb state=present
-    
-    - name: install gulp
-      command: npm install -g gulp
+          
     
     - name: install bower
       command: npm install -g bower
-
+      
+    - name: install git
+      apt: name=git state=present
+    
     - name: name change
       copy: src=../tasks/hostname.yml dest=/etc/hostname mode=644 owner=root group=root
       notify: restart
-
+    - script: ../tasks/create.sh  
     - script: ../tasks/curl.sh
