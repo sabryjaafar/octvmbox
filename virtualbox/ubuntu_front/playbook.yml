@@ -30,5 +30,5 @@
     - name: name change
       copy: src=../tasks/hostname.yml dest=/etc/hostname mode=644 owner=root group=root
       notify: restart
-    - script: ../tasks/create.sh  
-    - script: ../tasks/curl.sh
+    
+    - script: ../tasks/install_meteor.sh
